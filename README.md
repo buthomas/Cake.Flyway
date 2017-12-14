@@ -11,10 +11,10 @@ Master | [![Build status](https://ci.appveyor.com/api/projects/status/8kqq1fvxgx
 Develop | [![Build status](https://ci.appveyor.com/api/projects/status/8kqq1fvxgxb665c1/branch/develop?svg=true)](https://ci.appveyor.com/project/buthomas/cake-flyway/branch/develop)
 
 ## Code Coverage
-Branch | Status
---- | ---
-Master | [![codecov](https://codecov.io/gh/buthomas/Cake.Flyway/branch/master/graph/badge.svg)](https://codecov.io/gh/buthomas/Cake.Flyway)
-Develop | [![codecov](https://codecov.io/gh/buthomas/Cake.Flyway/branch/develop/graph/badge.svg)](https://codecov.io/gh/buthomas/Cake.Flyway)
+Branch | codecov | coveralls
+--- | --- | ---
+Master | [![codecov](https://codecov.io/gh/buthomas/Cake.Flyway/branch/master/graph/badge.svg)](https://codecov.io/gh/buthomas/Cake.Flyway) | [![Coverage Status](https://coveralls.io/repos/github/buthomas/Cake.Flyway/badge.svg?branch=master)](https://coveralls.io/github/buthomas/Cake.Flyway?branch=master)
+Develop | [![codecov](https://codecov.io/gh/buthomas/Cake.Flyway/branch/develop/graph/badge.svg)](https://codecov.io/gh/buthomas/Cake.Flyway) | [![Coverage Status](https://coveralls.io/repos/github/buthomas/Cake.Flyway/badge.svg?branch=develop)](https://coveralls.io/github/buthomas/Cake.Flyway?branch=develop)
 
 ### Nuget
 [![NuGet](https://img.shields.io/nuget/v/Cake.Flyway.svg)](https://www.nuget.org/packages/Cake.Flyway/) 
