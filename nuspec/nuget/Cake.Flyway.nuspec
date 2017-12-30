@@ -8,6 +8,7 @@
     <licenseUrl>https://github.com/buthomas/Cake.Flyway/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/buthomas/Cake.Flyway</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
     <summary>Adds Flyway aliases for Cake</summary>
     <description>A set of aliases for Cake to help with running Flyway scripts as part of a build</description>
     <tags>Cake Script Build Flyway</tags>
