@@ -1,17 +1,9 @@
-using Cake.Testing.Fixtures;
+using System;
 
 namespace Cake.Flyway.Tests
 {
-    public class FlywayInfoFixture : ToolFixture<FlywayInfoSettings>
+    public class FlywayInfoFixture : FlywayFixtureBase<FlywayInfoSettings>
     {
-        public FlywayInfoFixture() : base("flyway.cmd") { }
-
-        public FlywayConfiguration FlywayConfiguration { get; } = new FlywayConfiguration();
-
-        protected override void RunTool()
-        {
-            var tool = new FlywayRunner(FileSystem, Environment, ProcessRunner, Tools);
-            tool.Info(FlywayConfiguration);
-        }
+        protected override Action<IFlywayRunnerCommands> RunToolAction => tool => tool.Info(FlywayConfiguration);
     }
 }

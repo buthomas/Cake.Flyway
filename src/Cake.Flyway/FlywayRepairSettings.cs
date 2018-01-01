@@ -1,28 +1,45 @@
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.IO;
 using System.Linq;
 
 namespace Cake.Flyway
 {
     /// <summary>
-    /// Flyway info or migration settings
+    /// Flyway repair settings
     /// </summary>
-    public abstract class FlywayInfoOrMigrateSettings : FlywayRunnerSettings
+    public class FlywayRepairSettings : FlywaySettingsBase
     {
         /// <summary>
-        /// Flyway info or migration settings
+        /// Flyway repair settings
+        /// </summary>
+        public FlywayRepairSettings()
+            : this(new FlywayConfiguration()) { }
+
+        /// <summary>
+        /// Flyway repair settings
+        /// </summary>
+        /// <param name="configuration"></param>
+        public FlywayRepairSettings(FlywayConfiguration configuration) 
+            : base("repair", configuration) { }
+
+        /// <summary>
+        /// Flyway settings ctor for derived classes
         /// </summary>
         /// <param name="command"></param>
         /// <param name="configuration"></param>
-        protected FlywayInfoOrMigrateSettings(string command, FlywayConfiguration configuration)
+        protected FlywayRepairSettings(string command, FlywayConfiguration configuration)
             : base(command, configuration) { }
 
         /// <summary>
-        /// Evaluate <see cref="FlywayRunnerSettings.Configuration"/>
+        /// Evaluate <see cref="FlywaySettingsBase.Configuration"/>
         /// </summary>
         /// <param name="args"></param>
         protected override void EvaluateCore(ProcessArgumentBuilder args)
         {
+            if (Configuration.Table != null)
+            {
+                args.Append($"-table={Configuration.Table}");
+            }
             if (Configuration.Locations.Any())
             {
                 args.Append($"-locations={string.Join(",", Configuration.Locations)}");
@@ -71,15 +88,6 @@ namespace Cake.Flyway
             {
                 args.Append($"-skipDefaultResolvers={Configuration.SkipDefaultResolvers.ToLowerString()}");
             }
-            if (Configuration.Target != null)
-            {
-                args.Append($"-target={Configuration.Target}");
-            }
-            if (Configuration.OutOfOrder != null)
-            {
-                args.Append($"-outOfOrder={Configuration.OutOfOrder.ToLowerString()}");
-            }
-
             base.EvaluateCore(args);
         }
     }

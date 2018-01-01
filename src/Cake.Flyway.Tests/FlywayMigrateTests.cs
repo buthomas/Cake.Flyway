@@ -3,134 +3,88 @@ using Shouldly;
 
 namespace Cake.Flyway.Tests
 {
-    public class FlywayMigrateTests
+    [TestFixture]
+    public class FlywayMigrateTests : FlywayValidateTests
     {
+        private const string BaselineVersion = "1.2.3.99";
+        private const string BaselineDescription = "Lorem ipsum dolor sit ament";
         private const string InstalledBy = "User XY";
 
-        [Test]
-        public void TestWithoutSettings()
+        public override IFlywayFixture CreateFixture()
         {
-            var fixture = new FlywayMigrateFixture();
-            var result = fixture.Run();
-            result.Args.ShouldBe("migrate");
+            return new FlywayMigrateFixture();
         }
 
         [Test]
         public void TestMixed()
         {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.Mixed = true;
+            Fixture.FlywayConfiguration.Mixed = true;
 
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -mixed=true");
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -mixed=true");
         }
 
         [Test]
         public void TestGroup()
         {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.Group = true;
+            Fixture.FlywayConfiguration.Group = true;
 
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -group=true");
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -group=true");
         }
 
         [Test]
         public void TestValidateOnMigrate()
         {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.ValidateOnMigrate = true;
+            Fixture.FlywayConfiguration.ValidateOnMigrate = true;
 
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -validateOnMigrate=true");
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -validateOnMigrate=true");
         }
-
-        [Test]
-        public void TestCleanOnValidationError()
-        {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.CleanOnValidationError = true;
-
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -cleanOnValidationError=true");
-        }
-
-        [Test]
-        public void TestIgnoreMissingMigrations()
-        {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.IgnoreMissingMigrations = true;
-
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -ignoreMissingMigrations=true");
-        }
-
-        [Test]
-        public void TestIgnoreFutureMigrations()
-        {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.IgnoreFutureMigrations = true;
-
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -ignoreFutureMigrations=true");
-        }
-
+        
         [Test]
         public void TestCleanDisabled()
         {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.CleanDisabled = true;
+            Fixture.FlywayConfiguration.CleanDisabled = true;
 
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -cleanDisabled=true");
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -cleanDisabled=true");
         }
 
         [Test]
         public void TestBaselineOnMigrate()
         {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.BaselineOnMigrate = true;
+            Fixture.FlywayConfiguration.BaselineOnMigrate = true;
 
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -baselineOnMigrate=true");
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -baselineOnMigrate=true");
+        }
+
+        [Test]
+        public void TestBaselineVersion()
+        {
+            Fixture.FlywayConfiguration.BaselineVersion = BaselineVersion;
+
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -baselineVersion=\"{BaselineVersion}\"");
+        }
+
+        [Test]
+        public void TestBaselineDescription()
+        {
+            Fixture.FlywayConfiguration.BaselineDescription = BaselineDescription;
+
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -baselineDescription=\"{BaselineDescription}\"");
         }
 
         [Test]
         public void TestInstalledBy()
         {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.InstalledBy = InstalledBy;
+            Fixture.FlywayConfiguration.InstalledBy = InstalledBy;
 
-            var result = fixture.Run();
-            result.Args.ShouldBe($"migrate -installedBy={InstalledBy}");
-        }
-        
-        [Test]
-        public void TestMultipleSettings()
-        {
-            var fixture = new FlywayMigrateFixture();
-            fixture.FlywayConfiguration.Mixed = false;
-            fixture.FlywayConfiguration.Group = false;
-            fixture.FlywayConfiguration.ValidateOnMigrate = false;
-            fixture.FlywayConfiguration.CleanOnValidationError = false;
-            fixture.FlywayConfiguration.IgnoreMissingMigrations = false;
-            fixture.FlywayConfiguration.IgnoreFutureMigrations = false;
-            fixture.FlywayConfiguration.CleanDisabled = false;
-            fixture.FlywayConfiguration.BaselineOnMigrate = false;
-            fixture.FlywayConfiguration.InstalledBy = InstalledBy;
-
-            var result = fixture.Run();
-            result.Args.ShouldBe(
-                "migrate " + 
-                $"-mixed=false " +
-                $"-group=false " +
-                $"-validateOnMigrate=false " +
-                $"-cleanOnValidationError=false " +
-                $"-ignoreMissingMigrations=false " +
-                $"-ignoreFutureMigrations=false " +
-                $"-cleanDisabled=false " + 
-                $"-baselineOnMigrate=false " +
-                $"-installedBy={InstalledBy}");
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -installedBy={InstalledBy}");
         }
     }
 }

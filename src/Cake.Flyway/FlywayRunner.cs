@@ -8,7 +8,7 @@ namespace Cake.Flyway
     /// <summary>
     /// A wrapper around the Flyway command line tool
     /// </summary>
-    public class FlywayRunner : Tool<FlywayRunnerSettings>, IFlywayRunnerCommands
+    internal class FlywayRunner : Tool<FlywaySettingsBase>, IFlywayRunnerCommands
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FlywayRunner" /> class.
@@ -35,42 +35,6 @@ namespace Cake.Flyway
         /// </summary>
         /// <returns>The tool executable name</returns>
         protected override IEnumerable<string> GetToolExecutableNames() => new[] { "flyway.cmd", "flyway" };
-
-        /// <summary>
-        /// Execute 'flyway info' with options
-        /// </summary>
-        /// <param name="configuration"></param>
-        /// <example>
-        /// <para>Run 'flyway info'</para>
-        /// <code>
-        /// <![CDATA[
-        /// Task("Flyway-Info)
-        ///     .Does(() =>
-        ///     {
-        ///         Flyway.Info();
-        ///     });
-        /// ]]>
-        /// </code>
-        /// <para>Run 'flyway info'</para>
-        /// <code>
-        /// <![CDATA[
-        /// Task("Flyway-Info)
-        ///     .Does(() =>
-        ///     {
-        ///         Flyway.Info(new FlywayConfiguration
-        ///             {
-        ///                 OutOfOrder = true
-        ///             }
-        ///         );
-        ///     });
-        /// ]]>
-        /// </code>
-        /// </example>
-        public IFlywayRunnerCommands Info(FlywayConfiguration configuration = null)
-        {
-            var settings = new FlywayInfoSettings(configuration);
-            return Run(settings);
-        }
 
         /// <summary>
         /// Execute 'flyway migrate' with options
@@ -109,6 +73,100 @@ namespace Cake.Flyway
         }
 
         /// <summary>
+        /// Execute 'flyway clean' with options
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <example>
+        /// <para>Run 'flyway clean'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Clean)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Clean();
+        ///     });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IFlywayRunnerCommands Clean(FlywayConfiguration configuration = null)
+        {
+            var settings = new FlywayCleanSettings(configuration);
+            return Run(settings);
+        }
+
+        /// <summary>
+        /// Execute 'flyway info' with options
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <example>
+        /// <para>Run 'flyway info'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Info)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Info();
+        ///     });
+        /// ]]>
+        /// </code>
+        /// <para>Run 'flyway info'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Info)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Info(new FlywayConfiguration
+        ///             {
+        ///                 OutOfOrder = true
+        ///             }
+        ///         );
+        ///     });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IFlywayRunnerCommands Info(FlywayConfiguration configuration = null)
+        {
+            var settings = new FlywayInfoSettings(configuration);
+            return Run(settings);
+        }
+
+        /// <summary>
+        /// Execute 'flyway validate' with options
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <example>
+        /// <para>Run 'flyway validate'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Validate)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Validate();
+        ///     });
+        /// ]]>
+        /// </code>
+        /// <para>Run 'flyway validate'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Validate)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Validate(new FlywayConfiguration
+        ///             {
+        ///                 OutOfOrder = true
+        ///             }
+        ///         );
+        ///     });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IFlywayRunnerCommands Validate(FlywayConfiguration configuration = null)
+        {
+            var settings = new FlywayValidateSettings(configuration);
+            return Run(settings);
+        }
+
+        /// <summary>
         /// Execute 'flyway baseline' with options
         /// </summary>
         /// <param name="configuration"></param>
@@ -143,7 +201,43 @@ namespace Cake.Flyway
             var settings = new FlywayBaselineSettings(configuration);
             return Run(settings);
         }
-        
+
+        /// <summary>
+        /// Execute 'flyway repair' with options
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <example>
+        /// <para>Run 'flyway repair'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Repair)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Repair();
+        ///     });
+        /// ]]>
+        /// </code>
+        /// <para>Run 'flyway repair'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Flyway-Repair)
+        ///     .Does(() =>
+        ///     {
+        ///         Flyway.Repair(new FlywayConfiguration
+        ///             {
+        ///                 SqlMigrationPrefix = "M_"
+        ///             }
+        ///         );
+        ///     });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IFlywayRunnerCommands Repair(FlywayConfiguration configuration = null)
+        {
+            var settings = new FlywayRepairSettings(configuration);
+            return Run(settings);
+        }
+
         /// <summary>
         /// Generic runner using settings
         /// </summary>
@@ -151,14 +245,14 @@ namespace Cake.Flyway
         /// <param name="settings"></param>
         /// <returns></returns>
         private IFlywayRunnerCommands Run<TSettings>(TSettings settings) 
-            where TSettings : FlywayRunnerSettings
+            where TSettings : FlywaySettingsBase
         {
             var args = GetFlywaySettingsArguments(settings);
             Run(settings, args);
             return this;
         }
 
-        private static ProcessArgumentBuilder GetFlywaySettingsArguments(FlywayRunnerSettings settings)
+        private static ProcessArgumentBuilder GetFlywaySettingsArguments(FlywaySettingsBase settings)
         {
             var args = new ProcessArgumentBuilder();
             settings?.Evaluate(args);

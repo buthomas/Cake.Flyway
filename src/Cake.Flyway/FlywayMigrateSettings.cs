@@ -6,7 +6,7 @@ namespace Cake.Flyway
     /// <summary>
     /// Flyway migrate settings
     /// </summary>
-    public class FlywayMigrateSettings : FlywayInfoOrMigrateSettings
+    public class FlywayMigrateSettings : FlywayValidateSettings
     {
         /// <summary>
         /// Flyway migrate settings
@@ -39,18 +39,6 @@ namespace Cake.Flyway
             {
                 args.Append($"-validateOnMigrate={Configuration.ValidateOnMigrate.ToLowerString()}");
             }
-            if (Configuration.CleanOnValidationError != null)
-            {
-                args.Append($"-cleanOnValidationError={Configuration.CleanOnValidationError.ToLowerString()}");
-            }
-            if (Configuration.IgnoreMissingMigrations != null)
-            {
-                args.Append($"-ignoreMissingMigrations={Configuration.IgnoreMissingMigrations.ToLowerString()}");
-            }
-            if (Configuration.IgnoreFutureMigrations != null)
-            {
-                args.Append($"-ignoreFutureMigrations={Configuration.IgnoreFutureMigrations.ToLowerString()}");
-            }
             if (Configuration.CleanDisabled != null)
             {
                 args.Append($"-cleanDisabled={Configuration.CleanDisabled.ToLowerString()}");
@@ -58,6 +46,14 @@ namespace Cake.Flyway
             if (Configuration.BaselineOnMigrate != null)
             {
                 args.Append($"-baselineOnMigrate={Configuration.BaselineOnMigrate.ToLowerString()}");
+            }
+            if (Configuration.BaselineVersion != null)
+            {
+                args.Append($"-baselineVersion=\"{Configuration.BaselineVersion}\"");
+            }
+            if (Configuration.BaselineDescription != null)
+            {
+                args.Append($"-baselineDescription=\"{Configuration.BaselineDescription}\"");
             }
             if (!string.IsNullOrEmpty(Configuration.InstalledBy))
             {

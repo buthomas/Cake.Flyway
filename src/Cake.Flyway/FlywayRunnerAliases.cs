@@ -42,7 +42,7 @@ namespace Cake.Flyway
         /// </code>
         /// </example>
         [CakePropertyAlias]
-        public static FlywayRunner Flyway(this ICakeContext context)
+        public static IFlywayRunnerCommands Flyway(this ICakeContext context)
         {
             if (context == null)
             {
