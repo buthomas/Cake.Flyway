@@ -48,6 +48,11 @@ Build the Cake.Flyway.dll then use as follows
 ## Scope
 Cake.Flyway currently supports the following commands of Flyway v4.2.0:
 
-* ```flyway baseline```
-* ```flaway info```
 * ```flyway migrate```
+* ```flyway clean```
+* ```flaway info```
+* ```flaway validate```
+* ```flyway baseline```
+* ```flaway repair```
+
+The Flyway Pro features of version 5 are currently not supported.

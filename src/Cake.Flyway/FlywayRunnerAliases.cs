@@ -7,6 +7,8 @@ namespace Cake.Flyway
     /// <summary>
     /// Provides a wrapper around Flyway functionality within a Cake build script
     /// </summary>
+    [CakeAliasCategory("Flyway")]
+    [CakeAliasCategory("Database")]
     public static class FlywayRunnerAliases
     {
         /// <summary>
@@ -40,7 +42,7 @@ namespace Cake.Flyway
         /// </code>
         /// </example>
         [CakePropertyAlias]
-        public static FlywayRunner Flyway(this ICakeContext context)
+        public static IFlywayRunnerCommands Flyway(this ICakeContext context)
         {
             if (context == null)
             {

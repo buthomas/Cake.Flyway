@@ -9,24 +9,24 @@ namespace Cake.Flyway
     /// <summary>
     /// Flyway runner settings
     /// </summary>
-    public abstract class FlywayRunnerSettings : ToolSettings
+    public abstract class FlywaySettingsBase : ToolSettings
     {
         /// <summary>
         /// The command to run
         /// </summary>
-        protected readonly string Command;
+        internal readonly string Command;
 
         /// <summary>
         /// The <see cref="FlywayConfiguration"/>
         /// </summary>
-        protected readonly FlywayConfiguration Configuration;
+        internal readonly FlywayConfiguration Configuration;
 
         /// <summary>
         /// Flyway runner settings
         /// </summary>
         /// <param name="command"></param>
         /// <param name="configuration"></param>
-        public FlywayRunnerSettings(string command, FlywayConfiguration configuration)
+        internal FlywaySettingsBase(string command, FlywayConfiguration configuration)
         {
             if (string.IsNullOrWhiteSpace(command))
             {
@@ -72,10 +72,6 @@ namespace Cake.Flyway
             {
                 args.Append($"-schemas={string.Join(",", Configuration.Schemas)}");
             }
-            if (Configuration.Table != null)
-            {
-                args.Append($"-table={Configuration.Table}");
-            }
             if (Configuration.JarDirs.Any())
             {
                 args.Append($"-jarDirs=\"{string.Join("\",\"", Configuration.JarDirs)}\"");
@@ -87,14 +83,6 @@ namespace Cake.Flyway
             if (Configuration.SkipDefaultCallbacks != null)
             {
                 args.Append($"-skipDefaultCallbacks={Configuration.SkipDefaultCallbacks.ToLowerString()}");
-            }
-            if (Configuration.BaselineVersion != null)
-            {
-                args.Append($"-baselineVersion=\"{Configuration.BaselineVersion}\"");
-            }
-            if (Configuration.BaselineDescription != null)
-            {
-                args.Append($"-baselineDescription=\"{Configuration.BaselineDescription}\"");
             }
         }
     }
