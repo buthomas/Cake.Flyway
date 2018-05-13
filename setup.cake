@@ -20,7 +20,7 @@ BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(
     context: Context,
-    testCoverageFilter: "+[*]* -[NUnit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* -[Shouldly]*",
+    testCoverageFilter: "+[*]* -[nunit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* -[Shouldly]*",
     testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
     testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
 
