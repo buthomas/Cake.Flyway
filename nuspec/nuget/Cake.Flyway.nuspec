@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<package >
+<?xml version="1.0" encoding="utf-8"?>
+ <package>
   <metadata>
     <id>Cake.Flyway</id>
     <title>Cake.Flyway</title>
@@ -8,7 +8,7 @@
     <licenseUrl>https://github.com/buthomas/Cake.Flyway/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/buthomas/Cake.Flyway</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
     <summary>Adds Flyway aliases for Cake</summary>
     <description>A set of aliases for Cake to help with running Flyway scripts as part of a build</description>
     <tags>Cake Script Build Flyway</tags>
@@ -17,9 +17,6 @@
     <file src="net46\Cake.Flyway.dll" target="lib\net46" />
     <file src="net46\Cake.Flyway.xml" target="lib\net46" />
     <file src="net46\Cake.Flyway.pdb" target="lib\net46" />
-    <file src="netstandard1.6\Cake.Flyway.dll" target="lib\netstandard1.6" />
-    <file src="netstandard1.6\Cake.Flyway.xml" target="lib\netstandard1.6" />
-    <file src="netstandard1.6\Cake.Flyway.pdb" target="lib\netstandard1.6" />
     <file src="netstandard2.0\Cake.Flyway.dll" target="lib\netstandard2.0" />
     <file src="netstandard2.0\Cake.Flyway.xml" target="lib\netstandard2.0" />
     <file src="netstandard2.0\Cake.Flyway.pdb" target="lib\netstandard2.0" />
