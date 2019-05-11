@@ -29,6 +29,6 @@ branches:
 #---------------------------------#
 #  Build Cache                    #
 #---------------------------------#
-# cache:
-# - Source\packages -> src\**\packages.config
-# - Tools -> setup.cake
+cache:
+- src\packages -> src\**\*.csproj
+- tools -> setup.cake
