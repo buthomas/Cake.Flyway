@@ -30,5 +30,4 @@ branches:
 #  Build Cache                    #
 #---------------------------------#
 cache:
-- src\packages -> src\**\*.csproj
 - tools -> setup.cake
