@@ -1,49 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.0</Version>
-    <Description>A set of aliases for Cake to help with running Flyway commands as part of a build</Description>
-    <Copyright>Copyright © Thomas Burgener 2017 - Present</Copyright>
-    <PackageTags>Cake Script Build Flyway</PackageTags>
-    <RepositoryUrl>https://github.com/buthomas/Cake.Flyway</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/buthomas/Cake.Flyway</PackageProjectUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MPL-2.0</PackageLicenseUrl>
-    <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
-    <Authors>Thomas Burgener</Authors>
-    <ReleaseNotes>https://github.com/buthomas/Cake.Flyway/releases</ReleaseNotes>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <DefineConstants>NETSTANDARD2_0;</DefineConstants>
+  <PropertyGroup>
+    <Authors>Thomas Burgener</Authors>
+    <Copyright>Copyright 2017-$([System.DateTime]::Now.Year) - $(Authors)</Copyright>
+    <Description>A set of aliases for Cake to help with running Flyway commands as part of a build</Description>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MPL-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+    <PackageTags>Cake Script Build Flyway</PackageTags>
+    <ReleaseNotes>https://github.com/buthomas/Cake.Flyway/releases</ReleaseNotes>
+    <RepositoryUrl>https://github.com/buthomas/Cake.Flyway</RepositoryUrl>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Cake.Flyway.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net46|AnyCPU'">
-    <DocumentationFile>bin\Release\net46\Cake.Flyway.xml</DocumentationFile>
-  </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Cake.Common" Version="0.33.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Cake.Core" Version="0.33.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
-    <PackageReference Include="Cake.Common" Version="0.33.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Cake.Core" Version="0.33.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+  <ItemGroup>
+    <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

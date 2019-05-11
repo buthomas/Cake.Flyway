@@ -14,9 +14,6 @@
     <tags>Cake Script Build Flyway</tags>
   </metadata>
   <files>
-    <file src="net46\Cake.Flyway.dll" target="lib\net46" />
-    <file src="net46\Cake.Flyway.xml" target="lib\net46" />
-    <file src="net46\Cake.Flyway.pdb" target="lib\net46" />
     <file src="netstandard2.0\Cake.Flyway.dll" target="lib\netstandard2.0" />
     <file src="netstandard2.0\Cake.Flyway.xml" target="lib\netstandard2.0" />
     <file src="netstandard2.0\Cake.Flyway.pdb" target="lib\netstandard2.0" />
