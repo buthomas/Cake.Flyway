@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -10,11 +9,12 @@
     <Copyright>Copyright 2017-$([System.DateTime]::Now.Year) - $(Authors)</Copyright>
     <Description>A set of aliases for Cake to help with running Flyway commands as part of a build</Description>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MPL-2.0</PackageLicenseUrl>
-    <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/buthomas/Cake.Flyway</PackageProjectUrl>
     <PackageTags>Cake Script Build Flyway</PackageTags>
     <ReleaseNotes>https://github.com/buthomas/Cake.Flyway/releases</ReleaseNotes>
-    <RepositoryUrl>https://github.com/buthomas/Cake.Flyway</RepositoryUrl>
+    <RepositoryUrl>https://github.com/buthomas/Cake.Flyway.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
