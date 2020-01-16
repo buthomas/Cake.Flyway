@@ -12,14 +12,7 @@ namespace Cake.Flyway
         /// Flyway migrate settings
         /// </summary>
         public FlywayMigrateSettings()
-            : this(new FlywayConfiguration()) { }
-
-        /// <summary>
-        /// Flyway migrate settings
-        /// </summary>
-        /// <param name="configuration"></param>
-        public FlywayMigrateSettings(FlywayConfiguration configuration)
-            : base("migrate", configuration) { }
+            : base("migrate") { }
 
         /// <summary>
         /// Evaluate options

@@ -26,7 +26,7 @@ namespace Cake.Flyway.Tests
 
         public override IFlywayFixture CreateFixture()
         {
-            return new FlywayRepairFixture();
+            return new FlywayFixture<FlywayRepairSettings>();
         }
         
         [Test]

@@ -10,7 +10,8 @@ BuildParameters.SetParameters(context: Context,
                             repositoryName: "Cake.Flyway",
                             appVeyorAccountName: "buthomas",
                             shouldRunDupFinder: false,
-                            shouldRunCodecov: true);
+                            shouldRunCodecov: true,
+                            shouldRunDotNetCorePack: true);
 
 BuildParameters.PrintParameters(Context);
 

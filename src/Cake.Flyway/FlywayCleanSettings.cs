@@ -11,15 +11,8 @@ namespace Cake.Flyway
         /// <summary>
         /// Flyway clean settings
         /// </summary>
-        public FlywayCleanSettings()
-            : this(new FlywayConfiguration()) { }
-
-        /// <summary>
-        /// Flyway clean settings
-        /// </summary>
-        /// <param name="configuration"></param>
-        public FlywayCleanSettings(FlywayConfiguration configuration) 
-            : base("clean", configuration) { }
+        public FlywayCleanSettings() 
+            : base("clean") { }
 
         /// <summary>
         /// Evaluate <see cref="FlywaySettingsBase.Configuration"/>
