@@ -8,7 +8,7 @@ namespace Cake.Flyway.Tests
     {
         public override IFlywayFixture CreateFixture()
         {
-            return new FlywayCleanFixture();
+            return new FlywayFixture<FlywayCleanSettings>();
         }
 
         [Test]

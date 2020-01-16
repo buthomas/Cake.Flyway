@@ -1,4 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Cake.Core;
+using Cake.Core.IO;
+using NUnit.Framework;
 using Shouldly;
 
 namespace Cake.Flyway.Tests
@@ -7,6 +11,7 @@ namespace Cake.Flyway.Tests
     public abstract class FlywayTestsBase
     {
         private const string ConfigPath = "path/to/config";
+        private readonly List<string> ConfigPaths = new List<string> { "path/to/config1", "path/to/config2", "path/to/config1" };
         private const string Url = "a.test.url";
         private const string Driver = "aDriver";
         private const string User = "aUser";
@@ -20,7 +25,7 @@ namespace Cake.Flyway.Tests
 
         public abstract IFlywayFixture CreateFixture();
 
-        protected string Command { get { return Fixture?.Command; } }
+        protected string Command => Fixture?.Command;
 
         protected IFlywayFixture Fixture { get; set; }
 
@@ -43,7 +48,16 @@ namespace Cake.Flyway.Tests
             Fixture.FlywayConfiguration.ConfigurationFile = ConfigPath;
 
             var result = Fixture.Run();
-            result.Args.ShouldBe($"{Command} -configFile=\"{ConfigPath}\"");
+            result.Args.ShouldBe($"{Command} -configFile={ConfigPath.Quote()}");
+        }
+
+        [Test]
+        public void TestConfigFiles()
+        {
+            Fixture.FlywayConfiguration.ConfigurationFiles.UnionWith(ConfigPaths.Select(FilePath.FromString));
+
+            var result = Fixture.Run();
+            result.Args.ShouldBe($"{Command} -configFiles={string.Join(",", ConfigPaths.Select(x => x.Quote()))}");
         }
 
         [Test]

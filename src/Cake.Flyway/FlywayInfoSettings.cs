@@ -11,23 +11,14 @@ namespace Cake.Flyway
         /// <summary>
         /// Flyway info settings
         /// </summary>
-        public FlywayInfoSettings()
-            : this(new FlywayConfiguration()) { }
-
-        /// <summary>
-        /// Flyway info settings
-        /// </summary>
-        /// <param name="configuration"></param>
-        public FlywayInfoSettings(FlywayConfiguration configuration) 
-            : base("info", configuration) { }
+        public FlywayInfoSettings() 
+            : base("info") { }
 
         /// <summary>
         /// Flyway settings ctor for derived classes
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="configuration"></param>
-        protected FlywayInfoSettings(string command, FlywayConfiguration configuration)
-            : base(command, configuration) { }
+        protected FlywayInfoSettings(string command)
+            : base(command) { }
 
         /// <summary>
         /// Evaluate <see cref="FlywaySettingsBase.Configuration"/>

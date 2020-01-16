@@ -1,8 +1,6 @@
-﻿using Cake.Core;
-using NSubstitute;
+﻿using System;
 using NUnit.Framework;
 using Shouldly;
-using System;
 
 namespace Cake.Flyway.Tests
 {
@@ -12,15 +10,12 @@ namespace Cake.Flyway.Tests
         [Test]
         public void TestThatExceptionIsThrownIfContextIsNull()
         {
-            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.Flyway(null));
-        }
-
-        [Test]
-        public void Test()
-        {
-            var context = Substitute.For<ICakeContext>();
-            var flyway = context.Flyway();
-            flyway.ShouldNotBeNull();
+            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.FlywayBaseline(null));
+            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.FlywayClean(null));
+            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.FlywayInfo(null));
+            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.FlywayMigrate(null));
+            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.FlywayRepair(null));
+            Should.Throw<ArgumentNullException>(() => FlywayRunnerAliases.FlywayValidate(null));
         }
     }
 }
