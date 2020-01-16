@@ -1,17 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Cake.Core.IO;
 
 namespace Cake.Flyway
 {
     /// <summary>
-    /// Flyway configuration
+    /// Flyway configuration object
     /// </summary>
     public class FlywayConfiguration
     {
         /// <summary>
-        /// Path to the Flyway configuration file to be used 
+        /// Path to the Flyway configuration files to be used 
         /// (default: &lt;&lt;INSTALL-DIR&gt;&gt;/conf/flyway.conf)
         /// </summary>
+        [Obsolete("This was removed in Flyway 6.0.0 and upwards, use ConfigurationFiles instead.")]
         public string ConfigurationFile { get; set; }
+
+        /// <summary>
+        /// Path to the Flyway configuration files to be used.
+        /// </summary>
+        public ISet<FilePath> ConfigurationFiles { get; } = new HashSet<FilePath>();
 
         /// <summary>
         /// Jdbc url to use to connect to the database
@@ -92,7 +100,7 @@ namespace Cake.Flyway
         /// List of directories containing JDBC drivers and Java-based migrations. 
         /// (default: &lt;&lt;INSTALL-DIR&gt;&gt;/jars)
         /// </summary>
-        public IList<string> JarDirs { get; } = new List<string>();
+        public IList<DirectoryPath> JarDirs { get; } = new List<DirectoryPath>();
 
         /// <summary>
         /// <para>File name prefix for sql migrations (default: V )</para>
@@ -277,9 +285,10 @@ namespace Cake.Flyway
         /// <paramref name="location"/>
         /// </summary>
         /// <param name="location">Path to the filesystem location</param>
-        public void AddFilesystemLocation(string location)
+        public FlywayConfiguration AddFilesystemLocation(string location)
         {
             Locations.Add($"filesystem:{location}");
+            return this;
         }
 
         /// <summary>
@@ -288,9 +297,10 @@ namespace Cake.Flyway
         /// <paramref name="location"/>
         /// </summary>
         /// <param name="location">Path to the classpath location</param>
-        public void AddClasspathLocation(string location)
+        public FlywayConfiguration AddClasspathLocation(string location)
         {
             Locations.Add($"classpath:{location}");
+            return this;
         }
     }
 }

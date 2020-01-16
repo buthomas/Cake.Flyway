@@ -1,8 +1,8 @@
 using System;
+using System.Linq;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
-using System.Linq;
 
 namespace Cake.Flyway
 {
@@ -19,21 +19,18 @@ namespace Cake.Flyway
         /// <summary>
         /// The <see cref="FlywayConfiguration"/>
         /// </summary>
-        internal readonly FlywayConfiguration Configuration;
+        public FlywayConfiguration Configuration { get; set; } = new FlywayConfiguration();
 
         /// <summary>
         /// Flyway runner settings
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="configuration"></param>
-        internal FlywaySettingsBase(string command, FlywayConfiguration configuration)
+        protected FlywaySettingsBase(string command)
         {
             if (string.IsNullOrWhiteSpace(command))
             {
                 throw new ArgumentNullException(nameof(command));
             }
             Command = command;
-            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         internal void Evaluate(ProcessArgumentBuilder args)
@@ -48,9 +45,15 @@ namespace Cake.Flyway
         /// <param name="args"></param>
         protected virtual void EvaluateCore(ProcessArgumentBuilder args)
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             if (Configuration.ConfigurationFile != null)
             {
-                args.Append($"-configFile=\"{Configuration.ConfigurationFile}\"");
+                args.Append($"-configFile={Configuration.ConfigurationFile.Quote()}");
+            }
+#pragma warning restore CS0618 // Type or member is obsolete
+            if (Configuration.ConfigurationFiles.Any())
+            {
+                args.Append($"-configFiles={string.Join(",", Configuration.ConfigurationFiles.Select(x => x.ToString().Quote()))}");
             }
             if (!string.IsNullOrEmpty(Configuration.Url))
             {
@@ -62,11 +65,11 @@ namespace Cake.Flyway
             }
             if (Configuration.User != null)
             {
-                args.Append($"-user=\"{Configuration.User}\"");
+                args.Append($"-user={Configuration.User.Quote()}");
             }
             if (Configuration.Password != null)
             {
-                args.Append($"-password=\"{Configuration.Password}\"");
+                args.Append($"-password={Configuration.Password.Quote()}");
             }
             if (Configuration.Schemas.Any())
             {
@@ -74,7 +77,7 @@ namespace Cake.Flyway
             }
             if (Configuration.JarDirs.Any())
             {
-                args.Append($"-jarDirs=\"{string.Join("\",\"", Configuration.JarDirs)}\"");
+                args.Append($"-jarDirs={string.Join(",", Configuration.JarDirs.Select(x => x.ToString().Quote()))}");
             }
             if (Configuration.Callbacks.Any())
             {

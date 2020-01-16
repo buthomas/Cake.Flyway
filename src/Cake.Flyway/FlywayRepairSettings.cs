@@ -12,23 +12,14 @@ namespace Cake.Flyway
         /// <summary>
         /// Flyway repair settings
         /// </summary>
-        public FlywayRepairSettings()
-            : this(new FlywayConfiguration()) { }
-
-        /// <summary>
-        /// Flyway repair settings
-        /// </summary>
-        /// <param name="configuration"></param>
-        public FlywayRepairSettings(FlywayConfiguration configuration) 
-            : base("repair", configuration) { }
+        public FlywayRepairSettings() 
+            : base("repair") { }
 
         /// <summary>
         /// Flyway settings ctor for derived classes
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="configuration"></param>
-        protected FlywayRepairSettings(string command, FlywayConfiguration configuration)
-            : base(command, configuration) { }
+        protected FlywayRepairSettings(string command)
+            : base(command) { }
 
         /// <summary>
         /// Evaluate <see cref="FlywaySettingsBase.Configuration"/>

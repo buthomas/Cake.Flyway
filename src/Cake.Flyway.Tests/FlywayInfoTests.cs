@@ -10,7 +10,7 @@ namespace Cake.Flyway.Tests
 
         public override IFlywayFixture CreateFixture()
         {
-            return new FlywayInfoFixture();
+            return new FlywayFixture<FlywayInfoSettings>();
         }
         
         [Test]
