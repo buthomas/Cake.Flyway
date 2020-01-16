@@ -43,7 +43,7 @@ namespace Cake.Flyway
         /// ]]>
         /// </code>
         /// </example>
-        [CakePropertyAlias]
+        [CakeMethodAlias]
         public static void FlywayMigrate(this ICakeContext context, FlywayMigrateSettings settings = null)
         {
             Run(context, settings);
@@ -64,6 +64,7 @@ namespace Cake.Flyway
         /// ]]>
         /// </code>
         /// </example>
+        [CakeMethodAlias]
         public static void FlywayClean(this ICakeContext context, FlywayCleanSettings settings = null)
         {
             Run(context, settings);
@@ -101,6 +102,7 @@ namespace Cake.Flyway
         /// ]]>
         /// </code>
         /// </example>
+        [CakeMethodAlias]
         public static void FlywayInfo(this ICakeContext context, FlywayInfoSettings settings = null)
         {
             Run(context, settings);
@@ -138,6 +140,7 @@ namespace Cake.Flyway
         /// ]]>
         /// </code>
         /// </example>
+        [CakeMethodAlias]
         public static void FlywayValidate(this ICakeContext context, FlywayValidateSettings settings = null)
         {
             Run(context, settings);
@@ -175,6 +178,7 @@ namespace Cake.Flyway
         /// ]]>
         /// </code>
         /// </example>
+        [CakeMethodAlias]
         public static void FlywayBaseline(this ICakeContext context, FlywayBaselineSettings settings = null)
         {
             Run(context, settings);
@@ -212,6 +216,7 @@ namespace Cake.Flyway
         /// ]]>
         /// </code>
         /// </example>
+        [CakeMethodAlias]
         public static void FlywayRepair(this ICakeContext context, FlywayRepairSettings settings = null)
         {
             Run(context, settings);
