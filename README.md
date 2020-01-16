@@ -26,27 +26,31 @@ Develop | [![codecov](https://codecov.io/gh/buthomas/Cake.Flyway/branch/develop/
 Build the Cake.Flyway.dll then use as follows
 
 ```c#
-    #addin "Cake.Flyway"
+#addin "Cake.Flyway"
 
-    Task("Flyway")
-        .Does(() => {
-            // new Flyway configuration
-            var configuration = new FlywayConfiguration {
-                Url = "jdbc:sqlserver:////<host>:<port>;databaseName=<database>",
-                User = "<user>",
-                Password = "<password>"
-            }
+Task("Flyway")
+    .Does(() => {
+        // new Flyway configuration
+        var configuration = new FlywayConfiguration {
+            Url = "jdbc:sqlserver:////<host>:<port>;databaseName=<database>",
+            User = "<user>",
+            Password = "<password>"
+        }
 
-            // flyway info
-            Flyway.Info(configuration);
-
-            // flyway migrate
-            Flyway.Migrate(configuration);
+        // flyway info
+        FlywayInfo(new FlywayInfoSettings {
+            Configuration = configuration;
         });
+
+        // flyway migrate
+        FlywayMigrate(new FlywayMigrateSettings {
+            Configuration = configuration;
+        });
+    });
 ```
 
 ## Scope
-Cake.Flyway currently supports the following commands of Flyway v4.2.0:
+Cake.Flyway currently supports the following commands of Flyway:
 
 * ```flyway migrate```
 * ```flyway clean```
@@ -55,4 +59,4 @@ Cake.Flyway currently supports the following commands of Flyway v4.2.0:
 * ```flyway baseline```
 * ```flaway repair```
 
-The Flyway Pro features of version 5 are currently not supported.
+The Flyway Pro features are currently not supported.
