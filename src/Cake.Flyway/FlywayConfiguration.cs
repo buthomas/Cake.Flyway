@@ -10,7 +10,7 @@ namespace Cake.Flyway
     public class FlywayConfiguration
     {
         /// <summary>
-        /// Path to the Flyway configuration files to be used 
+        /// Path to the Flyway configuration file to be used 
         /// (default: &lt;&lt;INSTALL-DIR&gt;&gt;/conf/flyway.conf)
         /// </summary>
         [Obsolete("This was removed in Flyway 6.0.0 and upwards, use ConfigurationFiles instead.")]
